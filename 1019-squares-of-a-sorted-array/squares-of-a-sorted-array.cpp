@@ -1,37 +1,36 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        vector<int>ans;
-        int negindex=-1;
-        for(int i=0 ; i< nums.size() ; i++){
-            if(nums[i]<0)negindex++;
-            nums[i]=pow(nums[i],2);
+        int i=0;
+        while(i<nums.size() && nums[i]<0 ){
+            i++;
         }
- 
- int posindex=negindex+1;
-        while(negindex>=0 && posindex<nums.size()){
-            if(nums[negindex]==nums[posindex]){
-                ans.push_back(nums[negindex]);
-                negindex--;
-            }
-            else if(nums[negindex]<nums[posindex]){
-                ans.push_back(nums[negindex]);
-                negindex--;
+      int j=i-1;
+for(int i=0 ; i<nums.size() ; i++){
+    nums[i]=nums[i]*nums[i];
+}
+
+vector<int>ans;
+        while(i<nums.size() && j>=0){
+            if(nums[i]<nums[j]){
+                ans.push_back(nums[i]);
+                i++;
             }
             else{
-                ans.push_back(nums[posindex]);
-                posindex++;
+                ans.push_back(nums[j]);
+                j--;
             }
-
         }
-    while(negindex>=0){
-        ans.push_back(nums[negindex]);
-        negindex--;
-    }
-    while(posindex<nums.size()){
-        ans.push_back(nums[posindex]);
-        posindex++;
-    }
+
+        while(i<nums.size()){
+           ans.push_back(nums[i]);
+                i++;
+        }
+        while(j>=0){
+            ans.push_back(nums[j]);
+                j--;
+        }
         return ans;
+    
     }
 };
